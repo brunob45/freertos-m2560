@@ -1,0 +1,12 @@
+{
+    "build": {
+        "flags": [
+            "-Iinclude",
+            "-Iport"
+        ],
+        "srcFilter": [
+            "+<kernel/*.c>",
+            "+<port/*.c>"
+        ]
+    }
+}
