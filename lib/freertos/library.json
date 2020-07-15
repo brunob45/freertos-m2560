@@ -1,7 +1,7 @@
 {
     "build": {
         "flags": [
-            "-Iinclude",
+            "-Ikernel/include",
             "-Iport"
         ],
         "srcFilter": [
