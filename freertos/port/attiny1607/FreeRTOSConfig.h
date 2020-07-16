@@ -28,7 +28,14 @@
 #ifndef FREERTOS_CONFIG_H
 #define FREERTOS_CONFIG_H
 
+#define TCB_t avrTCB_t
 #include <avr/io.h>
+#undef TCB_t
+
+#if !defined (F_CPU)
+#warning "F_CPU not defined, using 8MHz as default value."
+#define F_CPU 8000000UL
+#endif
 
 /*-----------------------------------------------------------
  * Application specific definitions.
@@ -43,12 +50,12 @@
  *----------------------------------------------------------*/
 
 #define configUSE_PREEMPTION		1
-#define configUSE_IDLE_HOOK			1
-#define configUSE_TICK_HOOK			0
-#define configCPU_CLOCK_HZ			( ( unsigned long ) 16000000 )
-#define configTICK_RATE_HZ			( ( TickType_t ) 1000 )
+#define configUSE_IDLE_HOOK			0
+#define configUSE_TICK_HOOK			1
+#define configCPU_CLOCK_HZ			( ( unsigned long ) 20000000 )
+#define configTICK_RATE_HZ			( ( TickType_t ) 1015 )
 #define configMAX_PRIORITIES		( 4 )
-#define configMINIMAL_STACK_SIZE	( ( unsigned short ) 120 )
+#define configMINIMAL_STACK_SIZE	( ( unsigned short ) 100 )
 #define configTOTAL_HEAP_SIZE		( (size_t ) ( 1500 ) )
 #define configMAX_TASK_NAME_LEN		( 8 )
 #define configUSE_TRACE_FACILITY	0
@@ -69,7 +76,5 @@ to exclude the API function. */
 #define INCLUDE_vTaskSuspend			0
 #define INCLUDE_vTaskDelayUntil			1
 #define INCLUDE_vTaskDelay				1
-
-void error(void);
 
 #endif /* FREERTOS_CONFIG_H */
