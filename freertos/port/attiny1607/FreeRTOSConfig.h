@@ -33,8 +33,8 @@
 #undef TCB_t
 
 #if !defined (F_CPU)
-#warning "F_CPU not defined, using 8MHz as default value."
-#define F_CPU 8000000UL
+#warning "F_CPU not defined, using 3.3MHz as default value."
+#define F_CPU 3300000UL
 #endif
 
 /*-----------------------------------------------------------
@@ -52,7 +52,7 @@
 #define configUSE_PREEMPTION		1
 #define configUSE_IDLE_HOOK			0
 #define configUSE_TICK_HOOK			1
-#define configCPU_CLOCK_HZ			( ( unsigned long ) 20000000 )
+#define configCPU_CLOCK_HZ			( ( unsigned long ) F_CPU )
 #define configTICK_RATE_HZ			( ( TickType_t ) 1015 )
 #define configMAX_PRIORITIES		( 4 )
 #define configMINIMAL_STACK_SIZE	( ( unsigned short ) 100 )
