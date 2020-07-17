@@ -37,4 +37,4 @@ $(DIR_BUILD)/%.o:$(DIR_PORT)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(TARGET) $(OBJ)
+	rm -rf $(TARGET) $(DIR_BUILD)/

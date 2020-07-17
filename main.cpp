@@ -5,9 +5,10 @@
 #include <task.h>
 
 #include "hardware.h"
+#include "tft.h"
 
 static void blink(void* vParams);
-void vApplicationTickHook(void);
+static void spi_send(void* vParams);
 
 int main(void)
 {
@@ -17,6 +18,7 @@ int main(void)
 	HARDWARE_INIT();
 
 	xTaskCreate(blink, "Blink", 120, NULL, tskIDLE_PRIORITY+1, NULL);
+	xTaskCreate(spi_send, "SPI", 120, NULL, tskIDLE_PRIORITY+2, NULL);
 
 	vTaskStartScheduler();
 
@@ -38,7 +40,23 @@ void blink(void* vParams)
 	}
 }
 
-void vApplicationTickHook(void)
+static void spi_send(void* vParams)
+{
+	bool inv = false;
+
+	TFTClass tft;
+
+	tft.begin();
+
+	for(;;)
+	{
+		vTaskDelay(500);
+		tft.invertDisplay(inv);
+		inv = !inv;
+	}
+}
+
+extern "C" void vApplicationTickHook(void)
 {
 	LED_PORT ^= (1<<3);
 }
